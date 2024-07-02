@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Activity Logs
+{% endblock %}
+
+
+{% block content %}
+    <ul>
+        {% for log in logs %}
+            <li>{{ log.activity_type }} - {{ log.description }} - {{ log.timestamp }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

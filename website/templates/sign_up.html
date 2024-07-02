@@ -1,0 +1,33 @@
+{% extends "base2.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+ 
+
+    <center>
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+         <div class="register-card">
+            <div class="register-left">
+              <form action="/signup" method="post">
+                <input class="email" id="email" name="email" type="email" placeholder="email" maxlength="30" required>
+                <input type="name" id="firstName" class="username" name="firstName" placeholder="Username" maxlength="15" autocomplete="off" required>
+                <input class="password" id="password1" name="password1" type="password" maxlength="15" placeholder="password" autocomplete="off" required>
+                <input class="password" id="password1" name="password2" type="password" maxlength="15" placeholder="password" autocomplete="off" required>
+                <br>
+                <input class="submit" type="submit" value="Register">  
+              </form>
+              
+            </div>
+        
+            <div class="register-right">
+              <h1>Register</h1>
+              <p class="subtext">Already a user? <a href="/login">Login</a></p>
+            </div> 
+          </div>
+        <div class="in"></div>
+     
+      </center>
+
+{% endblock %}

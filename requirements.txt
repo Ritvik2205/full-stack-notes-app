@@ -1,0 +1,11 @@
+flask
+flask_login
+flask_sqlalchemy
+flask_mail
+redis
+flask-session
+Flask-PyMongo
+python-dotenv
+PyMySQL
+cryptography
+mysql-connector-python

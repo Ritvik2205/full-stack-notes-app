@@ -1,0 +1,172 @@
+# version: '3.5'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    command: sh -c "sleep 10s ; python3 ./app.py"
+    environment:
+      MAIL_USERNAME: backup.ritvik@gmail.com
+      MAIL_PASSWORD: bosj ffxm imcq hbtg
+      MAIL_USE_TLS: "False"
+      MAIL_USE_SSL: "True"
+      MAIL_DEFAULT_SENDER: backup.ritvik@gmail.com
+      SESSION_TYPE: redis
+      SESSION_REDIS_HOST: redis
+      SESSION_REDIS_PORT: 6379
+      MONGO_URI: mongodb://mongo:27017/logs
+      SQLALCHEMY_DATABASE_URI: mysql+pymysql://ritvik22:zxcvbnm@mysql:3306/database
+    depends_on:
+      - redis
+      - mongo
+      - mysql
+    networks:
+      - webnet
+
+  mysql:
+    image: "mariadb:10.4"
+    platform: linux/x86_64
+    container_name: "mysql"
+    volumes:
+      - mysql-tj:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_INITDB_SKIP_TZINFO: 1
+      TZ: Asia/Kolkata
+    ports:
+      - "${MYSQL_PORT}:3306"
+    networks:
+      - webnet
+    restart: always
+  redis:
+    image: "redis:latest"
+    platform: linux/x86_64
+    container_name: redis
+    ports:
+      - "${REDIS_PORT}:6379"
+    networks:
+      - webnet
+    restart: always
+    # phpmyadmin:
+    #   image: phpmyadmin/phpmyadmin
+    #   platform: linux/x86_64
+    #   container_name: "png-phpmyadmin"
+    #   links:
+    #     - mysql
+    #   environment:
+    #     PMA_HOST: mysql
+    #     PMA_PORT: ${MYSQL_PORT}
+    #   ports:
+    #     - "${PMA_PORT}:80"
+    #   volumes:
+    #     - pma-session:/session
+    #   networks:
+    #     - webnet
+    #   restart: always
+  mongo:
+    image: mongo:4.4
+    platform: linux/x86_64
+    container_name: mongo
+    volumes:
+      - mongo-tj:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - webnet
+    restart: always
+    # es:
+    #   image: elasticsearch:7.5.1
+    #   platform: linux/x86_64
+    #   container_name: es
+    #   volumes:
+    #     - esdata-tj:/usr/share/elasticsearch/data
+    #   environment:
+    #     - node.name=tj-el
+    #     - cluster.name=es-docker-cluster
+    #     - bootstrap.memory_lock=true
+    #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    #     - discovery.type=single-node
+    #     - xpack.security.enabled=true
+    #     - ELASTIC_PASSWORD=test123
+    #     - a=b
+    #   ulimits:
+    #     memlock:
+    #       soft: -1
+    #       hard: -1
+    #   ports:
+    #     - 9200:9200
+    #   networks:
+    #     - webnet
+    #   restart: always
+    # kibana:
+    #   image: kibana:7.5.1
+    #   platform: linux/x86_64
+    #   container_name: kibana
+    #   environment:
+    #     - ELASTICSEARCH_HOSTS=http://es:9200
+    #     - ELASTICSEARCH_USERNAME=elastic
+    #     - ELASTICSEARCH_PASSWORD="test123"
+    #     - xpack.security.enabled=true
+    #     - a=b
+    #   ports:
+    #     - 5601:5601
+    #   links:
+    #     - es
+    #   networks:
+    #     - webnet
+    #   restart: always
+
+volumes:
+  mongo-tj:
+  # pma-session:
+  mysql-tj:
+  # esdata-tj:
+  
+networks:
+  webnet:
+    name: webnet
+
+#   redis:
+#     image: "redis:alpine"
+#     ports:
+#       - "6379:6379"
+#     networks:
+#       - webnet
+
+#   mongo:
+#     image: "mongo:latest"
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo-data:/data/db
+#     networks:
+#       - webnet
+
+#   mysql:
+#     image: "mysql:latest"
+#     environment:
+#       MYSQL_DATABASE: test
+#       # MYSQL_USER: root
+#       MYSQL_ROOT_PASSWORD: "password"
+#       # MYSQL_PASSWORD: "password"
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql-data:/var/lib/mysql
+#     networks:
+#       - webnet
+#     restart: always
+
+# volumes:
+#   mongo-data:
+#   mysql-data:
+
+# networks:
+#   webnet:
+
+
+
+
+  
