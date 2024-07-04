@@ -16,7 +16,7 @@ services:
       SESSION_REDIS_HOST: redis
       SESSION_REDIS_PORT: 6379
       MONGO_URI: mongodb://mongo:27017/logs
-      SQLALCHEMY_DATABASE_URI: mysql+pymysql://ritvik22:zxcvbnm@mysql:3306/database
+      # SQLALCHEMY_DATABASE_URI: mysql+pymysql://ritvik22:zxcvbnm@mysql:3306/database
     depends_on:
       - redis
       - mongo

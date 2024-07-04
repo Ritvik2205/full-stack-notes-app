@@ -10,7 +10,7 @@ from flask_pymongo import PyMongo
 # from .auth import get_current_user
 import datetime
 from dotenv import load_dotenv
-import mysql.connector
+# import mysql.connector
 
 load_dotenv()
 
